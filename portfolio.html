@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigitMarkT - Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #d4f0d4; /* light greenish text */
+      background: 
+        linear-gradient(rgba(4, 49, 75, 0.85), rgba(34, 70, 38, 0.85)),
+        url('digitmarkt.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: rgba(4, 49, 75, 0.8); /* dark blue overlay */
+      font-weight: bold;
+      font-style: italic;
+      font-size: 2rem;
+      letter-spacing: 1.2px;
+      color: #a3d9a5; /* forest green text */
+      text-shadow: 0 0 5px #0b3d0b;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: rgba(4, 49, 75, 0.9); /* dark blue nav background */
+      padding: 1rem 0;
+    }
+
+    nav a {
+      color: #a3d9a5; /* forest green links */
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover, nav a[aria-current="page"] {
+      color: #72b572; /* brighter forest green */
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: rgba(34, 70, 38, 0.8); /* forest green transparent */
+      border: 2px solid #2a5230; /* darker forest green border */
+      border-radius: 10px;
+      padding: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #d4f0d4;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #72b572;
+    }
+
+    .project-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      border: 1px solid #2a5230;
+    }
+
+    .project-title {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #a3d9a5;
+      text-shadow: 0 0 3px #234d23;
+    }
+
+    .project-description {
+      font-size: 1rem;
+      color: #c8e6c9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background-color: rgba(4, 49, 75, 0.9);
+      color: #a3d9a5;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    DigitMarkT Portfolio
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="portfolio.html" aria-current="page">Portfolio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section class="portfolio-grid">
+      <article class="project-card">
+        <img src="project1.jpg" alt="Project 1 Screenshot" class="project-image" />
+        <h3 class="project-title">Eyelashes Business Website</h3>
+        <p class="project-description">A responsive, modern website built with HTML, CSS, and JavaScript tailored for local businesses.</p>
+      </article>
+
+      <article class="project-card">
+        <img src="project2.jpg" alt="Project 2 Screenshot" class="project-image" />
+        <h3 class="project-title">Motor Machenic Web Application</h3>
+        <p class="project-description">An interactive web app using React.js with a clean UI and seamless user experience.</p>
+      </article>
+
+      <article class="project-card">
+        <img src="project3.jpg" alt="Project 3 Screenshot" class="project-image" />
+        <h3 class="project-title">My Greeting Card</h3>
+        <p class="project-description">A Python script to automate daily tasks and improve workflow efficiency for clients.</p>
+      </article>
+      <!-- Add more projects as needed -->
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 DigitMarkT — Transforming ideas into reality
+  </footer>
+</body>
+</html>
