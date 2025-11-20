@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DigitMarkT - Home</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
+    /* --- Global Styles --- */
     body {
       margin: 0;
       padding: 0;
@@ -31,8 +31,9 @@
 
     nav {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
       background-color: rgba(4, 49, 75, 0.9);
       padding: 1rem 0;
     }
@@ -76,7 +77,7 @@
     .contact-buttons {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
       flex-wrap: wrap;
       margin-top: 2rem;
     }
@@ -104,6 +105,58 @@
       color: #a3d9a5;
       font-size: 0.9rem;
       margin-top: 3rem;
+    }
+
+    /* --- Responsive Styles --- */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.6rem;
+        padding: 1.5rem 1rem;
+      }
+
+      main {
+        margin: 2rem auto;
+        padding: 0.8rem;
+      }
+
+      .slogan {
+        font-size: 1.3rem;
+      }
+
+      .summary {
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .contact-buttons a {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+      }
+
+      footer {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1rem 0.5rem;
+      }
+
+      .slogan {
+        font-size: 1.1rem;
+      }
+
+      .summary {
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .contact-buttons a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -139,4 +192,5 @@
   </footer>
 </body>
 </html>
+
 
