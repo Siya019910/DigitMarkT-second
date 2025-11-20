@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DigitMarkT - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
+    /* --- Global Styles --- */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #d4f0d4; /* light greenish text */
+      color: #d4f0d4;
       background: 
         linear-gradient(rgba(4, 49, 75, 0.85), rgba(34, 70, 38, 0.85)),
         url('digitmarkt.png') no-repeat center center fixed;
@@ -20,32 +20,33 @@
     header {
       text-align: center;
       padding: 2rem 1rem;
-      background-color: rgba(4, 49, 75, 0.8); /* dark blue overlay */
+      background-color: rgba(4, 49, 75, 0.8);
       font-weight: bold;
       font-style: italic;
       font-size: 2rem;
       letter-spacing: 1.2px;
-      color: #a3d9a5; /* forest green text */
+      color: #a3d9a5;
       text-shadow: 0 0 5px #0b3d0b;
     }
 
     nav {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
-      background-color: rgba(4, 49, 75, 0.9); /* dark blue nav background */
+      gap: 1rem;
+      background-color: rgba(4, 49, 75, 0.9);
       padding: 1rem 0;
     }
 
     nav a {
-      color: #a3d9a5; /* forest green links */
+      color: #a3d9a5;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s ease;
     }
 
     nav a:hover, nav a[aria-current="page"] {
-      color: #72b572; /* brighter forest green */
+      color: #72b572;
       text-decoration: underline;
     }
 
@@ -62,8 +63,8 @@
     }
 
     .project-card {
-      background: rgba(34, 70, 38, 0.8); /* forest green transparent */
-      border: 2px solid #2a5230; /* darker forest green border */
+      background: rgba(34, 70, 38, 0.8);
+      border: 2px solid #2a5230;
       border-radius: 10px;
       padding: 1rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -106,12 +107,53 @@
       font-size: 0.9rem;
       margin-top: 3rem;
     }
+
+    /* --- Responsive Styles --- */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.6rem;
+        padding: 1.5rem 1rem;
+      }
+
+      main {
+        margin: 1.5rem auto;
+        padding: 0.8rem;
+      }
+
+      .project-title {
+        font-size: 1.1rem;
+      }
+
+      .project-description {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1rem 0.5rem;
+      }
+
+      .project-title {
+        font-size: 1rem;
+      }
+
+      .project-description {
+        font-size: 0.9rem;
+      }
+
+      .portfolio-grid {
+        gap: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     DigitMarkT Portfolio
   </header>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="services.html">Services</a>
@@ -129,7 +171,7 @@
 
       <article class="project-card">
         <img src="project2.jpg" alt="Project 2 Screenshot" class="project-image" />
-        <h3 class="project-title">Motor Machenic Web Application</h3>
+        <h3 class="project-title">Motor Mechanic Web Application</h3>
         <p class="project-description">An interactive web app using React.js with a clean UI and seamless user experience.</p>
       </article>
 
@@ -147,3 +189,4 @@
   </footer>
 </body>
 </html>
+
