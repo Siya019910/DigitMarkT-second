@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DigitMarkT - Contact</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
+    /* --- Global Styles --- */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -29,10 +29,11 @@
 
     nav {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
       background-color: rgba(4, 49, 75, 0.9);
-      padding: 1rem 0;
+      padding: 0.8rem 0;
     }
 
     nav a {
@@ -87,6 +88,8 @@
       font-size: 1rem;
       background-color: rgba(255, 255, 255, 0.1);
       color: #fff;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .contact-form textarea {
@@ -117,12 +120,78 @@
       font-size: 0.9rem;
       margin-top: 3rem;
     }
+
+    /* --- Responsive Styles --- */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.6rem;
+        padding: 1.5rem 1rem;
+      }
+
+      nav {
+        gap: 0.5rem;
+        padding: 0.6rem 0;
+      }
+
+      main {
+        margin: 1.5rem auto;
+        padding: 0 0.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .contact-details {
+        font-size: 0.95rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        font-size: 0.95rem;
+        padding: 0.7rem;
+      }
+
+      .contact-form button {
+        font-size: 0.95rem;
+        padding: 0.7rem;
+      }
+
+      footer {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1rem 0.5rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .contact-details {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+
+      .contact-form button {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    DigitMarkT
-  </header>
+  <header>DigitMarkT</header>
 
   <nav>
     <a href="index.html">Home</a>
@@ -151,7 +220,5 @@
   <footer>
     &copy; 2025 DigitMarkT — Transforming ideas into reality
   </footer>
-
-  <script src="scripts.js"></script>
 </body>
 </html>
