@@ -2,195 +2,368 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigitMarkT - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigitMarkT — Transforming Ideas into Reality</title>
+  <meta name="description" content="DigitMarkT builds responsive websites, web apps, and digital solutions that help your business grow online." />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* --- Global Styles --- */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #d4f0d4;
-      background: 
-        linear-gradient(rgba(4, 49, 75, 0.85), rgba(34, 70, 38, 0.85)),
-        url('digitmarkt.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: rgba(4, 49, 75, 0.8);
-      font-weight: bold;
-      font-style: italic;
-      font-size: 2rem;
-      letter-spacing: 1.2px;
-      color: #a3d9a5;
-      text-shadow: 0 0 5px #0b3d0b;
-    }
-
-    nav {
+    /* ── Hero ── */
+    .hero {
+      min-height: calc(100vh - var(--header-height));
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       justify-content: center;
-      gap: 1rem;
-      background-color: rgba(4, 49, 75, 0.9);
-      padding: 1rem 0;
+      align-items: flex-start;
+      padding: 5rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    nav a {
-      color: #a3d9a5;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 230, 118, 0.08);
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      border-radius: 40px;
+      padding: 0.35rem 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      color: var(--accent-green);
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease forwards;
     }
 
-    nav a:hover, nav a[aria-current="page"] {
-      color: #72b572;
-      text-decoration: underline;
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: blink 1.4s ease infinite;
     }
 
-    main {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 1rem;
-      text-align: center;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
     }
 
-    .slogan {
-      font-style: italic;
-      font-size: 1.5rem;
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-primary);
       margin-bottom: 1rem;
-      color: #c8e6c9;
-      text-shadow: 0 0 5px #1b3f1b;
+      animation: fadeUp 0.7s 0.1s ease both;
     }
 
-    .summary {
-      font-size: 1.1rem;
-      color: #d4f0d4;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
-      text-shadow: 0 0 2px #1c3d1c;
+    .hero h1 .highlight {
+      color: var(--accent-green);
+      text-shadow: 0 0 30px rgba(0, 230, 118, 0.4);
     }
 
-    .contact-buttons {
+    .hero-typed {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--accent-teal);
+      margin-bottom: 1.5rem;
+      min-height: 2rem;
       display: flex;
-      justify-content: center;
+      align-items: center;
+      gap: 0.3rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: var(--accent-teal);
+      animation: blink 0.8s step-end infinite;
+    }
+
+    .hero-slogan {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
       gap: 1rem;
       flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    /* ── Stats Row ── */
+    .stats-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(4, 30, 55, 0.5);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-item .num {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      display: block;
+    }
+
+    .stat-item .label {
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── Services Preview ── */
+    .services-preview {
+      max-width: 1100px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
       margin-top: 2rem;
     }
 
-    .contact-buttons a {
-      padding: 0.75rem 1.5rem;
-      border: 2px solid #a3d9a5;
+    .service-mini {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 10px;
-      color: #a3d9a5;
-      background-color: transparent;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s, color 0.3s;
+      padding: 1.5rem;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      backdrop-filter: blur(8px);
     }
 
-    .contact-buttons a:hover {
-      background-color: #a3d9a5;
-      color: #04314b;
+    .service-mini:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 24px rgba(0, 230, 118, 0.12);
+      transform: translateY(-4px);
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      background-color: rgba(4, 49, 75, 0.9);
-      color: #a3d9a5;
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .service-mini h3 {
+      font-family: 'Orbitron', monospace;
       font-size: 0.9rem;
-      margin-top: 3rem;
+      color: var(--accent-green);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
     }
 
-    /* --- Responsive Styles --- */
+    .service-mini p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      max-width: 1100px;
+      margin: 2rem auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-inner {
+      background: linear-gradient(135deg, rgba(0,230,118,0.08), rgba(0,188,212,0.06));
+      border: 1px solid rgba(0,230,118,0.25);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .cta-inner h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-inner p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 768px) {
-      header {
-        font-size: 1.6rem;
-        padding: 1.5rem 1rem;
+      .hero {
+        padding: 3rem 1.2rem 2rem;
+        align-items: center;
+        text-align: center;
       }
 
-      main {
-        margin: 2rem auto;
-        padding: 0.8rem;
+      .hero-typed {
+        justify-content: center;
       }
 
-      .slogan {
-        font-size: 1.3rem;
+      .hero-cta {
+        justify-content: center;
       }
 
-      .summary {
-        font-size: 1rem;
-        line-height: 1.5;
+      .services-preview,
+      .cta-banner {
+        padding: 0 1.2rem;
       }
 
-      .contact-buttons a {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.95rem;
-      }
-
-      footer {
-        font-size: 0.85rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header {
-        font-size: 1.3rem;
-        padding: 1rem 0.5rem;
-      }
-
-      .slogan {
-        font-size: 1.1rem;
-      }
-
-      .summary {
-        font-size: 0.95rem;
-        line-height: 1.4;
-      }
-
-      .contact-buttons a {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
+      .stats-inner {
+        padding: 1.5rem 1.2rem;
       }
     }
   </style>
 </head>
 <body>
+
   <header>
-    DigitMarkT
+    <a href="index.html" class="logo">Digit<span>Mark</span>T</a>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="services.html">Services</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Available for Projects
+    </div>
 
-  <main>
-    <h2 class="slogan">"Transforming Ideas into Reality. Your Tasks Mastered."</h2>
+    <h1>
+      Transforming Ideas<br />
+      into <span class="highlight">Reality.</span>
+    </h1>
 
-    <p class="summary">
-      Welcome to the digital age — where innovation meets simplicity. 
-      At <em>DigitMarkT</em>, we turn imagination into immersive online experiences. 
-      Embrace the power of technology and watch your vision come alive in the digital world.
+    <div class="hero-typed">
+      <span class="typed-text"></span>
+      <span class="cursor"></span>
+    </div>
+
+    <p class="hero-slogan">
+      "Your Tasks Mastered." — At DigitMarkT, we build immersive digital
+      experiences that elevate your brand and drive real results.
     </p>
 
-    <div class="contact-buttons">
-      <a href="https://wa.me/27642122136">WhatsApp Me</a>
-      <a href="mailto:siyabongathomo.tpy@gmail.com">Email Me</a>
+    <div class="hero-cta">
+      <a href="services.html" class="btn btn-primary">Explore Services</a>
+      <a href="https://wa.me/27642122136" class="btn btn-outline" target="_blank">WhatsApp Me</a>
     </div>
-  </main>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="num">10+</span>
+        <span class="label">Projects Delivered</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">100%</span>
+        <span class="label">Client Satisfaction</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">4+</span>
+        <span class="label">Core Services</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">24h</span>
+        <span class="label">Response Time</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Preview -->
+  <section class="services-preview">
+    <p class="section-label">What I Do</p>
+    <h2 class="section-title">Built for the <span>Digital Age</span></h2>
+    <div class="services-grid">
+      <div class="service-mini fade-in">
+        <span class="service-icon">🖥️</span>
+        <h3>Web Development</h3>
+        <p>Responsive, fast-loading websites that look great on every device.</p>
+      </div>
+      <div class="service-mini fade-in">
+        <span class="service-icon">🎨</span>
+        <h3>Web Design</h3>
+        <p>Modern, intuitive designs crafted to engage and convert visitors.</p>
+      </div>
+      <div class="service-mini fade-in">
+        <span class="service-icon">⚙️</span>
+        <h3>App Development</h3>
+        <p>Custom web applications to automate tasks and scale your business.</p>
+      </div>
+      <div class="service-mini fade-in">
+        <span class="service-icon">💡</span>
+        <h3>Consulting</h3>
+        <p>Expert digital strategy and planning to guide your business forward.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-inner">
+      <h2>Ready to Go Digital?</h2>
+      <p>Let's build something great together. Reach out today.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+        <a href="mailto:siyabongathomo.tpy@gmail.com" class="btn btn-outline">Email Me</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2025 DigitMarkT — Transforming ideas into reality
+    &copy; 2025 <strong>DigitMarkT</strong> — Transforming ideas into reality
   </footer>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
+
 
 
