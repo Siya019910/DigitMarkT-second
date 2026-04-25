@@ -2,223 +2,293 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DigitMarkT - Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigitMarkT — Contact</title>
+  <meta name="description" content="Get in touch with DigitMarkT to start your next digital project." />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* --- Global Styles --- */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #d4f0d4;
-      background: 
-        linear-gradient(rgba(4, 49, 75, 0.85), rgba(34, 70, 38, 0.85)),
-        url('digitmarkt.png') no-repeat center center fixed;
-      background-size: cover;
+    /* ── Layout ── */
+    .contact-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 4rem;
+      align-items: start;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: rgba(4, 49, 75, 0.8);
-      font-weight: bold;
-      font-style: italic;
-      font-size: 2rem;
-      color: #a3d9a5;
-      text-shadow: 0 0 5px #0b3d0b;
+    /* ── Left Info Panel ── */
+    .contact-info .section-label {
+      margin-bottom: 0.5rem;
     }
 
-    nav {
+    .contact-info h2.section-title {
+      margin-bottom: 1rem;
+    }
+
+    .contact-info .intro {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-items {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
       gap: 1rem;
-      background-color: rgba(4, 49, 75, 0.9);
-      padding: 0.8rem 0;
     }
 
-    nav a {
-      color: #a3d9a5;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover,
-    nav a[aria-current="page"] {
-      color: #72b572;
-      text-decoration: underline;
-    }
-
-    main {
-      max-width: 700px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: #c8e6c9;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-details {
-      background-color: rgba(34, 70, 38, 0.75);
-      border: 2px solid #2a5230;
-      padding: 1rem;
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
       border-radius: 10px;
-      margin-bottom: 2rem;
-      text-align: left;
-      color: #d4f0d4;
-      font-size: 1rem;
+      background: rgba(0, 230, 118, 0.08);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .info-text .label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      color: var(--accent-teal);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .info-text a,
+    .info-text span {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .info-text a:hover {
+      color: var(--accent-green);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      background: rgba(0, 230, 118, 0.06);
+    }
+
+    /* ── Right Form Panel ── */
+    .contact-form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      padding: 0.8rem;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #fff;
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .submit-btn {
       width: 100%;
-      box-sizing: border-box;
-    }
-
-    .contact-form textarea {
-      height: 120px;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      background-color: #4caf50;
-      color: white;
-      font-weight: bold;
+      padding: 1rem;
+      background: var(--accent-green);
+      color: var(--bg-deep);
       border: none;
-      padding: 0.8rem;
       border-radius: 8px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      font-weight: 700;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+      margin-top: 0.5rem;
     }
 
-    .contact-form button:hover {
-      background-color: #388e3c;
+    .submit-btn:hover {
+      background: #fff;
+      box-shadow: 0 0 24px rgba(0, 230, 118, 0.4);
+      transform: translateY(-2px);
     }
 
-    footer {
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-note {
       text-align: center;
-      padding: 1rem 0;
-      background-color: rgba(4, 49, 75, 0.9);
-      color: #a3d9a5;
-      font-size: 0.9rem;
-      margin-top: 3rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
     }
 
-    /* --- Responsive Styles --- */
-    @media (max-width: 768px) {
-      header {
-        font-size: 1.6rem;
-        padding: 1.5rem 1rem;
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 1.2rem;
       }
 
-      nav {
-        gap: 0.5rem;
-        padding: 0.6rem 0;
-      }
-
-      main {
-        margin: 1.5rem auto;
-        padding: 0 0.8rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      .contact-details {
-        font-size: 0.95rem;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        font-size: 0.95rem;
-        padding: 0.7rem;
-      }
-
-      .contact-form button {
-        font-size: 0.95rem;
-        padding: 0.7rem;
-      }
-
-      footer {
-        font-size: 0.85rem;
+      .form-row {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 480px) {
-      header {
-        font-size: 1.3rem;
-        padding: 1rem 0.5rem;
-      }
-
-      h2 {
-        font-size: 1.3rem;
-      }
-
-      .contact-details {
-        font-size: 0.9rem;
-        padding: 0.8rem;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        font-size: 0.9rem;
-        padding: 0.6rem;
-      }
-
-      .contact-form button {
-        font-size: 0.9rem;
-        padding: 0.6rem;
+      .contact-form-card {
+        padding: 1.5rem 1.2rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>DigitMarkT</header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="contact.html" aria-current="page">Contact</a>
-  </nav>
+  <header>
+    <a href="index.html" class="logo">Digit<span>Mark</span>T</a>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </header>
 
-  <main>
-    <h2>Contact Me</h2>
+  <div class="contact-wrapper">
 
-    <div class="contact-details">
-      <p><strong>Address:</strong> 959 Lunga Street, Twala Section, Katlehong 1431</p>
-      <p><strong>WhatsApp:</strong> 064 212 2136</p>
-      <p><strong>Email:</strong> siyabongathomo.tpy@gmail.com</p>
+    <!-- Left: Info -->
+    <div class="contact-info">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's Build<br /><span>Together</span></h2>
+      <p class="intro">
+        Have a project in mind or just want to chat about ideas? I'm always open to new opportunities.
+        Reach out and I'll get back to you within 24 hours.
+      </p>
+
+      <div class="info-items">
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-text">
+            <span class="label">Location</span>
+            <span>959 Lunga Street, Twala Section,<br />Katlehong 1431</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">💬</div>
+          <div class="info-text">
+            <span class="label">WhatsApp</span>
+            <a href="https://wa.me/27642122136" target="_blank">064 212 2136</a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div class="info-text">
+            <span class="label">Email</span>
+            <a href="mailto:siyabongathomo.tpy@gmail.com">siyabongathomo.tpy@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a href="https://wa.me/27642122136" class="social-btn" target="_blank">
+          💬 WhatsApp
+        </a>
+        <a href="mailto:siyabongathomo.tpy@gmail.com" class="social-btn">
+          ✉️ Email
+        </a>
+      </div>
     </div>
 
-    <form action="/submit" method="POST" class="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </main>
+    <!-- Right: Form -->
+    <div class="contact-form-card fade-in">
+      <form class="contact-form" action="/submit" method="POST">
+        <div class="form-row">
+          <div class="field">
+            <label for="fname">Name</label>
+            <input id="fname" type="text" name="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="femail">Email</label>
+            <input id="femail" type="email" name="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="fsubject">Subject</label>
+          <input id="fsubject" type="text" name="subject" placeholder="Project inquiry, quote request…" />
+        </div>
+        <div class="field">
+          <label for="fmessage">Message</label>
+          <textarea id="fmessage" name="message" placeholder="Tell me about your project…" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message →</button>
+        <p class="form-note">I typically respond within 24 hours.</p>
+      </form>
+    </div>
+
+  </div>
 
   <footer>
-    &copy; 2025 DigitMarkT — Transforming ideas into reality
+    &copy; 2025 <strong>DigitMarkT</strong> — Transforming ideas into reality
   </footer>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
