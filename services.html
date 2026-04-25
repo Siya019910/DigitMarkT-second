@@ -2,197 +2,346 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DigitMarkT - Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigitMarkT — Services</title>
+  <meta name="description" content="DigitMarkT offers web development, design, app development, and digital consulting services." />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* --- Global Styles --- */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #d4f0d4;
-      background: 
-        linear-gradient(rgba(4, 49, 75, 0.85), rgba(34, 70, 38, 0.85)),
-        url('digitmarkt.png') no-repeat center center fixed;
-      background-size: cover;
+    /* ── Page Hero ── */
+    .page-hero {
+      padding: 4rem 2rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: rgba(4, 49, 75, 0.8);
-      font-weight: bold;
-      font-style: italic;
-      font-size: 2rem;
-      color: #a3d9a5;
-      text-shadow: 0 0 5px #0b3d0b;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      background-color: rgba(4, 49, 75, 0.9);
-      padding: 1rem 0;
-    }
-
-    nav a {
-      color: #a3d9a5;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover,
-    nav a[aria-current="page"] {
-      color: #72b572;
-      text-decoration: underline;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: #c8e6c9;
-      font-style: italic;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 4px #123d12;
+    /* ── Services Full Grid ── */
+    .services-section {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
     }
 
     .service-card {
-      background: rgba(34, 70, 38, 0.8);
-      border: 2px solid #2a5230;
-      border-radius: 10px;
-      padding: 1.5rem 1rem;
-      color: #d4f0d4;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .service-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #72b572;
+      border-color: var(--border-hover);
+      box-shadow: 0 0 32px rgba(0,230,118,0.12);
+      transform: translateY(-6px);
     }
 
-    .service-title {
-      font-weight: bold;
-      font-size: 1.3rem;
-      font-style: italic;
-      color: #a3d9a5;
-      margin-bottom: 0.75rem;
+    .service-card:hover::before {
+      opacity: 1;
     }
 
-    .service-desc {
+    .service-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: var(--accent-teal);
+      margin-bottom: 1rem;
+    }
+
+    .service-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: 'Orbitron', monospace;
       font-size: 1rem;
-      color: #c8e6c9;
+      color: var(--accent-green);
+      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
     }
 
-    footer {
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .service-features li {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .service-features li::before {
+      content: '▸';
+      color: var(--accent-green);
+      font-size: 0.75rem;
+    }
+
+    /* ── Tech Stack ── */
+    .stack-section {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stack-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .stack-item {
+      background: rgba(0, 188, 212, 0.06);
+      border: 1px solid rgba(0, 188, 212, 0.2);
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      color: var(--accent-teal);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .stack-item:hover {
+      background: rgba(0, 188, 212, 0.12);
+      border-color: rgba(0, 188, 212, 0.5);
+    }
+
+    /* ── Process Steps ── */
+    .process-section {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .step {
       text-align: center;
-      padding: 1rem 0;
-      background-color: rgba(4, 49, 75, 0.9);
-      color: #a3d9a5;
-      font-size: 0.9rem;
-      margin-top: 3rem;
+      padding: 1.5rem 1rem;
+      position: relative;
     }
 
-    /* --- Responsive Styles --- */
+    .step-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(0, 230, 118, 0.12);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .step h4 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .step p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
-      header {
-        font-size: 1.6rem;
-        padding: 1.5rem 1rem;
+      .page-hero,
+      .services-section,
+      .stack-section,
+      .process-section {
+        padding: 0 1.2rem;
       }
 
-      main {
-        margin: 1.5rem auto;
-        padding: 0.8rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      .service-title {
-        font-size: 1.15rem;
-      }
-
-      .service-desc {
-        font-size: 0.95rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header {
-        font-size: 1.3rem;
-        padding: 1rem 0.5rem;
-      }
-
-      h2 {
-        font-size: 1.3rem;
-      }
-
-      .service-title {
-        font-size: 1.05rem;
-      }
-
-      .service-desc {
-        font-size: 0.9rem;
-      }
-
-      .services-grid {
-        gap: 1rem;
+      .page-hero {
+        padding-top: 3rem;
       }
     }
   </style>
 </head>
 <body>
+
   <header>
-    DigitMarkT
+    <a href="index.html" class="logo">Digit<span>Mark</span>T</a>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html" aria-current="page">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html" aria-current="page">Services</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <p class="section-label">What I Offer</p>
+    <h2 class="section-title">My <span>Services</span></h2>
+    <p style="color: var(--text-muted); max-width: 600px; line-height: 1.7; font-size: 1rem;">
+      From concept to launch, I deliver end-to-end digital solutions tailored to your business needs.
+      Professional. Fast. Results-driven.
+    </p>
+  </div>
 
-  <main>
-    <h2>My Services</h2>
-    <section class="services-grid">
-      <div class="service-card">
-        <h3 class="service-title">Web Development</h3>
-        <p class="service-desc">We build responsive, SEO-friendly websites that represent your business professionally.</p>
+  <!-- Services Grid -->
+  <section class="services-section">
+    <div class="services-grid">
+
+      <div class="service-card fade-in">
+        <div class="service-num">01 / 04</div>
+        <span class="service-icon">🖥️</span>
+        <h3>Web Development</h3>
+        <p>Responsive, SEO-friendly websites that represent your business professionally and perform across all devices.</p>
+        <ul class="service-features">
+          <li>Mobile-first responsive design</li>
+          <li>HTML5, CSS3, JavaScript</li>
+          <li>SEO optimisation</li>
+          <li>Fast load performance</li>
+        </ul>
       </div>
-      <div class="service-card">
-        <h3 class="service-title">Web Design</h3>
-        <p class="service-desc">Modern, intuitive, and user-centered designs that enhance customer engagement.</p>
+
+      <div class="service-card fade-in">
+        <div class="service-num">02 / 04</div>
+        <span class="service-icon">🎨</span>
+        <h3>Web Design</h3>
+        <p>Modern, intuitive, and user-centred designs that enhance engagement and turn visitors into customers.</p>
+        <ul class="service-features">
+          <li>UI/UX best practices</li>
+          <li>Brand-aligned visuals</li>
+          <li>Interactive prototypes</li>
+          <li>Accessible design</li>
+        </ul>
       </div>
-      <div class="service-card">
-        <h3 class="service-title">Application Development</h3>
-        <p class="service-desc">Custom web apps with HTML, CSS, JavaScript, and Python to automate and scale your business.</p>
+
+      <div class="service-card fade-in">
+        <div class="service-num">03 / 04</div>
+        <span class="service-icon">⚙️</span>
+        <h3>Application Development</h3>
+        <p>Custom web apps with HTML, CSS, JavaScript, React, and Python to automate workflows and scale your business.</p>
+        <ul class="service-features">
+          <li>React.js web applications</li>
+          <li>Python automation scripts</li>
+          <li>API integrations</li>
+          <li>Admin dashboards</li>
+        </ul>
       </div>
-      <div class="service-card">
-        <h3 class="service-title">Consulting Services</h3>
-        <p class="service-desc">We guide startups and businesses through the digital journey with expert advice and planning.</p>
+
+      <div class="service-card fade-in">
+        <div class="service-num">04 / 04</div>
+        <span class="service-icon">💡</span>
+        <h3>Consulting Services</h3>
+        <p>Expert guidance for startups and growing businesses navigating the digital landscape with confidence.</p>
+        <ul class="service-features">
+          <li>Digital strategy planning</li>
+          <li>Technology stack advice</li>
+          <li>Project scoping</li>
+          <li>Growth roadmaps</li>
+        </ul>
       </div>
-    </section>
-  </main>
+
+    </div>
+  </section>
+
+  <div style="max-width:1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index:1;">
+    <div class="divider"></div>
+  </div>
+
+  <!-- Tech Stack -->
+  <section class="stack-section">
+    <p class="section-label">Technologies</p>
+    <h2 class="section-title">My <span>Tech Stack</span></h2>
+    <div class="stack-grid">
+      <span class="stack-item">HTML5</span>
+      <span class="stack-item">CSS3</span>
+      <span class="stack-item">JavaScript</span>
+      <span class="stack-item">React.js</span>
+      <span class="stack-item">Python</span>
+      <span class="stack-item">Git</span>
+      <span class="stack-item">Responsive Design</span>
+      <span class="stack-item">SEO</span>
+      <span class="stack-item">UI/UX</span>
+      <span class="stack-item">REST APIs</span>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process-section">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">My <span>Process</span></h2>
+    <div class="process-steps">
+      <div class="step fade-in">
+        <div class="step-num">01</div>
+        <h4>Discovery</h4>
+        <p>We discuss your goals, requirements, and vision to align on the best approach.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">02</div>
+        <h4>Design</h4>
+        <p>I craft wireframes and visual designs tailored to your brand and audience.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">03</div>
+        <h4>Build</h4>
+        <p>Clean, efficient code is written and tested thoroughly before delivery.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">04</div>
+        <h4>Launch</h4>
+        <p>Your project goes live with full support to ensure a smooth launch.</p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2025 DigitMarkT — Transforming ideas into reality
+    &copy; 2025 <strong>DigitMarkT</strong> — Transforming ideas into reality
   </footer>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
-
