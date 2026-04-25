@@ -2,191 +2,357 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DigitMarkT - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigitMarkT — Portfolio</title>
+  <meta name="description" content="Browse DigitMarkT's portfolio of web development and design projects." />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* --- Global Styles --- */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #d4f0d4;
-      background: 
-        linear-gradient(rgba(4, 49, 75, 0.85), rgba(34, 70, 38, 0.85)),
-        url('digitmarkt.png') no-repeat center center fixed;
-      background-size: cover;
+    /* ── Page Hero ── */
+    .page-hero {
+      padding: 4rem 2rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: rgba(4, 49, 75, 0.8);
-      font-weight: bold;
-      font-style: italic;
-      font-size: 2rem;
-      letter-spacing: 1.2px;
-      color: #a3d9a5;
-      text-shadow: 0 0 5px #0b3d0b;
-    }
-
-    nav {
+    /* ── Filter Bar ── */
+    .filter-bar {
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 0 2rem;
       display: flex;
+      gap: 0.75rem;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      background-color: rgba(4, 49, 75, 0.9);
-      padding: 1rem 0;
+      position: relative;
+      z-index: 1;
     }
 
-    nav a {
-      color: #a3d9a5;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      padding: 0.5rem 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s;
     }
 
-    nav a:hover, nav a[aria-current="page"] {
-      color: #72b572;
-      text-decoration: underline;
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(0, 230, 118, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
     }
 
-    main {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    /* ── Portfolio Grid ── */
+    .portfolio-section {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
     }
 
     .project-card {
-      background: rgba(34, 70, 38, 0.8);
-      border: 2px solid #2a5230;
-      border-radius: 10px;
-      padding: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #d4f0d4;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      cursor: pointer;
     }
 
     .project-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #72b572;
+      border-color: var(--border-hover);
+      box-shadow: 0 0 36px rgba(0, 230, 118, 0.12);
+      transform: translateY(-6px);
     }
 
-    .project-image {
+    .project-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,230,118,0.05));
+    }
+
+    .project-img-wrap img {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .project-card:hover .project-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    /* Placeholder when no image */
+    .project-img-wrap .img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(2,12,20,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--accent-green);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
       margin-bottom: 0.75rem;
-      border: 1px solid #2a5230;
     }
 
-    .project-title {
-      font-weight: bold;
-      font-style: italic;
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: #a3d9a5;
-      text-shadow: 0 0 3px #234d23;
+    .project-body h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.5px;
     }
 
-    .project-description {
-      font-size: 1rem;
-      color: #c8e6c9;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      background-color: rgba(4, 49, 75, 0.9);
-      color: #a3d9a5;
+    .project-body p {
       font-size: 0.9rem;
-      margin-top: 3rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    /* --- Responsive Styles --- */
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-tech {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .project-link {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      color: var(--accent-teal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover {
+      color: var(--accent-green);
+    }
+
+    /* ── CTA ── */
+    .portfolio-cta {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .portfolio-cta p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
     @media (max-width: 768px) {
-      header {
-        font-size: 1.6rem;
-        padding: 1.5rem 1rem;
+      .page-hero,
+      .filter-bar,
+      .portfolio-section,
+      .portfolio-cta {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
       }
 
-      main {
-        margin: 1.5rem auto;
-        padding: 0.8rem;
-      }
-
-      .project-title {
-        font-size: 1.1rem;
-      }
-
-      .project-description {
-        font-size: 0.95rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header {
-        font-size: 1.3rem;
-        padding: 1rem 0.5rem;
-      }
-
-      .project-title {
-        font-size: 1rem;
-      }
-
-      .project-description {
-        font-size: 0.9rem;
+      .page-hero {
+        padding-top: 3rem;
       }
 
       .portfolio-grid {
-        gap: 1rem;
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
+
   <header>
-    DigitMarkT Portfolio
+    <a href="index.html" class="logo">Digit<span>Mark</span>T</a>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html" aria-current="page">Portfolio</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-    <a href="portfolio.html" aria-current="page">Portfolio</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">My <span>Portfolio</span></h2>
+    <p style="color: var(--text-muted); max-width: 560px; line-height: 1.7; font-size: 1rem;">
+      A selection of projects I've designed and built — each one crafted with attention to detail and a focus on results.
+    </p>
+  </div>
 
-  <main>
-    <section class="portfolio-grid">
-      <article class="project-card">
-        <img src="project1.jpg" alt="Project 1 Screenshot" class="project-image" />
-        <h3 class="project-title">Eyelashes Business Website</h3>
-        <p class="project-description">A responsive, modern website built with HTML, CSS, and JavaScript tailored for local businesses.</p>
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web Dev</button>
+    <button class="filter-btn" data-filter="design">Design</button>
+    <button class="filter-btn" data-filter="app">Apps</button>
+  </div>
+
+  <!-- Portfolio Grid -->
+  <section class="portfolio-section">
+    <div class="portfolio-grid">
+
+      <article class="project-card fade-in" data-category="web design">
+        <div class="project-img-wrap">
+          <img src="project1.jpg" alt="Eyelashes Business Website" onerror="this.style.display='none'" />
+          <div class="img-placeholder">💅</div>
+          <div class="project-overlay">
+            <span class="project-overlay-label">View Project ↗</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Web Dev</span>
+            <span class="tag">Design</span>
+          </div>
+          <h3>Eyelashes Business Website</h3>
+          <p>A responsive, modern website built with HTML, CSS, and JavaScript tailored for local beauty businesses.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-tech">HTML · CSS · JavaScript</span>
+          <a href="#" class="project-link">VIEW →</a>
+        </div>
       </article>
 
-      <article class="project-card">
-        <img src="project2.jpg" alt="Project 2 Screenshot" class="project-image" />
-        <h3 class="project-title">Motor Mechanic Web Application</h3>
-        <p class="project-description">An interactive web app using React.js with a clean UI and seamless user experience.</p>
+      <article class="project-card fade-in" data-category="web app">
+        <div class="project-img-wrap">
+          <img src="project2.jpg" alt="Motor Mechanic Web Application" onerror="this.style.display='none'" />
+          <div class="img-placeholder">🔧</div>
+          <div class="project-overlay">
+            <span class="project-overlay-label">View Project ↗</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">App</span>
+            <span class="tag">React</span>
+          </div>
+          <h3>Motor Mechanic Web Application</h3>
+          <p>An interactive web app built with React.js featuring a clean UI and seamless booking experience.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-tech">React.js · CSS</span>
+          <a href="#" class="project-link">VIEW →</a>
+        </div>
       </article>
 
-      <article class="project-card">
-        <img src="project3.jpg" alt="Project 3 Screenshot" class="project-image" />
-        <h3 class="project-title">My Greeting Card</h3>
-        <p class="project-description">A Python script to automate daily tasks and improve workflow efficiency for clients.</p>
+      <article class="project-card fade-in" data-category="app">
+        <div class="project-img-wrap">
+          <img src="project3.jpg" alt="My Greeting Card" onerror="this.style.display='none'" />
+          <div class="img-placeholder">🎴</div>
+          <div class="project-overlay">
+            <span class="project-overlay-label">View Project ↗</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">App</span>
+          </div>
+          <h3>My Greeting Card</h3>
+          <p>A Python script to generate personalised greeting cards and automate communication workflows for clients.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-tech">Python · Automation</span>
+          <a href="#" class="project-link">VIEW →</a>
+        </div>
       </article>
-      <!-- Add more projects as needed -->
-    </section>
-  </main>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="portfolio-cta">
+    <p class="section-label" style="text-align:center; margin-bottom:0.5rem;">Ready to start?</p>
+    <h2 class="section-title" style="text-align:center;">Have a Project in <span>Mind?</span></h2>
+    <p>Let's turn your idea into a live digital product.</p>
+    <a href="contact.html" class="btn btn-primary">Start a Project</a>
+  </div>
 
   <footer>
-    &copy; 2025 DigitMarkT — Transforming ideas into reality
+    &copy; 2025 <strong>DigitMarkT</strong> — Transforming ideas into reality
   </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const cat = card.dataset.category || '';
+          card.style.display = (filter === 'all' || cat.includes(filter)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
 
