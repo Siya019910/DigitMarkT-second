@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DigitMarkT — Transforming Ideas into Reality</title>
   <meta name="description" content="DigitMarkT builds responsive websites, web apps, and digital solutions." />
-  
   <style>
     /* ── Variables & Reset ── */
     :root {
@@ -24,7 +23,7 @@
     body {
       background-color: var(--bg-dark);
       color: var(--text-primary);
-      font-family: 'Inter', sans-serif; /* Fallback */
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
     }
@@ -48,7 +47,7 @@
 
     nav { display: flex; gap: 2rem; }
     nav a { text-decoration: none; color: var(--text-muted); transition: 0.3s; }
-    nav a:hover { color: var(--accent-green); }
+    nav a:hover, nav a[aria-current="page"] { color: var(--accent-green); }
 
     /* ── Hero Section ── */
     .hero {
@@ -103,7 +102,7 @@
     .btn-outline { border: 1px solid var(--accent-green); color: var(--accent-green); }
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    /* ── Stats Bar (Auto-Grid) ── */
+    /* ── Stats Bar ── */
     .stats-bar {
       background: rgba(255, 255, 255, 0.03);
       padding: 3rem 5%;
@@ -142,21 +141,13 @@
 
     .service-mini:hover { transform: translateY(-5px); border-color: var(--accent-green); }
 
-    /* ── Responsive Mobile Fixes ── */
     @media (max-width: 768px) {
       header { padding: 0 1.5rem; }
-      nav { display: none; } /* Add a JS burger menu later */
-      
-      .hero {
-        text-align: center;
-        align-items: center;
-        padding-top: 4rem;
-      }
-      
+      nav { display: none; }
+      .hero { text-align: center; align-items: center; padding-top: 4rem; }
       .hero-cta { justify-content: center; width: 100%; }
-      .btn { width: 100%; } /* Stack buttons on mobile */
-      
-      .stats-inner { grid-template-columns: 1fr 1fr; } /* 2x2 on mobile */
+      .btn { width: 100%; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
     }
 
     footer {
@@ -171,12 +162,12 @@
 <body>
 
   <header>
-    <a href="#" class="logo">Digit<span>Mark</span>T</a>
+    <a href="index.html" class="logo">Digit<span>Mark</span>T</a>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Services</a>
-      <a href="#">Portfolio</a>
-      <a href="#">Contact</a>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
@@ -185,8 +176,8 @@
     <h1>Transforming Ideas <br> into <span class="highlight">Reality.</span></h1>
     <p class="hero-slogan">"Your Tasks Mastered." — At DigitMarkT, we build immersive digital experiences that elevate your brand.</p>
     <div class="hero-cta">
-      <a href="#" class="btn btn-primary">Explore Services</a>
-      <a href="https://wa.me/27642122136" class="btn btn-outline">WhatsApp Me</a>
+      <a href="services.html" class="btn btn-primary">Explore Services</a>
+      <a href="https://wa.me/27642122136" class="btn btn-outline" target="_blank">WhatsApp Me</a>
     </div>
   </section>
 
