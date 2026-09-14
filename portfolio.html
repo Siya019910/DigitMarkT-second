@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>DigitMarkT — Portfolio</title>
+  <meta name="description" content="Siyabonga Thomo — Full Stack Developer & Digital Entrepreneur. View projects that solve real business problems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════
+       VARIABLES & RESET
+    ══════════════════════════════════════ */
+    :root {
+      --accent-green:  #00e676;
+      --accent-teal:   #00bcd4;
+      --bg-dark:       #020c1b;
+      --bg-mid:        #041a2e;
+      --bg-card:       rgba(10, 25, 47, 0.75);
+      --text-primary:  #e6f1ff;
+      --text-muted:    #8892b0;
+      --border:        rgba(0, 230, 118, 0.18);
+      --border-hover:  rgba(0, 230, 118, 0.55);
+      --glow:          rgba(0, 230, 118, 0.12);
+      --header-h:      68px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* subtle grid background */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,230,118,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,230,118,.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ══════════════════════════════════════
+       HEADER / NAV
+    ══════════════════════════════════════ */
+    header {
+      height: var(--header-h);
+      position: sticky; top: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(2, 12, 27, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 0.4rem;
+      text-decoration: none;
+      font-family: 'Orbitron', monospace;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: white;
+      letter-spacing: 2px;
+      text-shadow: 0 0 18px rgba(0,230,118,.45);
+    }
+
+    .logo img {
+      height: 36px; width: 36px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .logo .mark { color: var(--accent-green); }
+
+    .logo {
+  display: flex; 
+  align-items: center; 
+  text-decoration: none;
+  /* Add padding if the logo feels too close to the edge */
+  padding: 5px;
+}
+
+    nav { display: flex; gap: 1.8rem; align-items: center; }
+    nav a {
+      text-decoration: none;
+      font-weight: 600; font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color .3s;
+      position: relative;
+    }
+    nav a::after {
+      content: ''; position: absolute; left: 0; bottom: -3px;
+      width: 0; height: 1px; background: var(--accent-green);
+      transition: width .3s;
+    }
+    nav a:hover, nav a[aria-current="page"] { color: var(--accent-green); }
+    nav a:hover::after, nav a[aria-current="page"]::after { width: 100%; }
+    nav a.nav-cta { background: var(--accent-green); color: var(--bg-dark); padding: 0.5rem 1.1rem; border-radius: 30px; letter-spacing: 1px; }
+    nav a.nav-cta::after { display: none; }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+      z-index: 1010;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--accent-green); border-radius: 2px; transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile nav */
+    @media (max-width: 860px) {
+      .hamburger { display: flex; }
+      nav {
+        display: none; position: absolute;
+        top: var(--header-h); left: 0; right: 0;
+        background: rgba(2,12,27,.97);
+        flex-direction: column; gap: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      nav.open { display: flex; }
+      nav a {
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--border);
+        width: 100%; font-size: 1rem;
+        letter-spacing: 2px;
+      }
+      nav a::after { display: none; }
+      nav a.nav-cta { border-radius: 0; text-align: center; }
+    }
+    html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+    img, svg { max-width: 100%; }
+
+    /* ══════════════════════════════════════
+       PAGE WRAPPER
+    ══════════════════════════════════════ */
+    .page { position: relative; z-index: 1; }
+
+    /* ══════════════════════════════════════
+       HERO / INTRO
+    ══════════════════════════════════════ */
+    .portfolio-hero {
+      max-width: 900px; margin: 0 auto;
+      padding: 4rem 5% 2.5rem;
+    }
+
+    .section-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem; letter-spacing: 4px;
+      color: var(--accent-teal); text-transform: uppercase;
+      display: block; margin-bottom: 0.75rem;
+    }
+
+    .portfolio-hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.8rem, 6vw, 3.2rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .portfolio-hero h1 .hl { color: var(--accent-green); }
+
+    .value-hook {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 720px;
+      border-left: 2px solid var(--accent-green);
+      padding-left: 1.2rem;
+    }
+
+    .value-hook strong { color: var(--text-primary); }
+
+    /* ══════════════════════════════════════
+       FILTER BAR
+    ══════════════════════════════════════ */
+    .filter-bar {
+      max-width: 900px; margin: 2rem auto 0;
+      padding: 0 5%;
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.45rem 1.2rem;
+      border-radius: 30px;
+      cursor: pointer; transition: all .3s;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--glow);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    /* ══════════════════════════════════════
+       FEATURED PROJECT (FULL WIDTH)
+    ══════════════════════════════════════ */
+    .featured-wrap {
+      max-width: 900px; margin: 3rem auto 0; padding: 0 5%;
+    }
+
+    .featured-label {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'Orbitron', monospace; font-size: 0.6rem;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent-green);
+      background: rgba(0,230,118,.08);
+      border: 1px solid var(--border);
+      border-radius: 30px; padding: 0.3rem 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .featured-label::before { content: '★'; font-size: 0.6rem; }
+
+    .featured-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-green);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 40px rgba(0,230,118,.08);
+      transition: box-shadow .4s, transform .4s;
+    }
+    .featured-card:hover {
+      box-shadow: 0 0 60px rgba(0,230,118,.15);
+      transform: translateY(-4px);
+    }
+
+    .featured-banner {
+      background: linear-gradient(135deg, #041a2e 0%, #062040 50%, #041a2e 100%);
+      padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+      min-height: 140px;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .featured-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 20px,
+        rgba(0,230,118,.015) 20px, rgba(0,230,118,.015) 21px
+      );
+    }
+
+    .featured-icon {
+      font-size: 3rem; flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+
+    .featured-meta { position: relative; z-index: 1; }
+    .featured-meta .proj-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem; letter-spacing: 3px;
+      color: var(--accent-teal); text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .featured-meta h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-weight: 800; color: white; line-height: 1.2;
+    }
+    .featured-meta h2 span { color: var(--accent-green); }
+
+    .featured-body { padding: 1.75rem 2rem; }
+
+    .proj-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 560px) {
+      .proj-grid-2 { grid-template-columns: 1fr; }
+      .featured-banner { flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 1.75rem 1.25rem; }
+    }
+
+    .detail-block label {
+      display: block;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.58rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--accent-teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-block p {
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;
+    }
+
+    .detail-block p strong { color: var(--text-primary); }
+
+    .tech-pills {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+    .pill {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem; letter-spacing: 1px;
+      background: rgba(0,188,212,.1);
+      border: 1px solid rgba(0,188,212,.25);
+      color: var(--accent-teal);
+      padding: 0.2rem 0.7rem; border-radius: 20px;
+    }
+
+    .outcome-box {
+      background: rgba(0,230,118,.05);
+      border: 1px solid rgba(0,230,118,.2);
+      border-radius: 10px; padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+    }
+    .outcome-box .icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+    .outcome-box p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+    .outcome-box p strong { color: var(--accent-green); }
+
+    .card-footer-actions {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 0.75rem;
+    }
+
+    .tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tag {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.58rem; letter-spacing: 1px;
+      color: var(--accent-green);
+      background: rgba(0,230,118,.08);
+      border: 1px solid rgba(0,230,118,.2);
+      padding: 0.2rem 0.65rem; border-radius: 20px;
+    }
+
+    .view-btn {
+      text-decoration: none;
+      background: var(--accent-green); color: var(--bg-dark);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.6rem 1.4rem; border-radius: 6px;
+      transition: all .3s; white-space: nowrap;
+    }
+    .view-btn:hover {
+      background: white;
+      box-shadow: 0 0 20px rgba(0,230,118,.4);
+      transform: translateY(-2px);
+    }
+
+    .view-btn-outline {
+      text-decoration: none;
+      background: transparent;
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.6rem 1.4rem; border-radius: 6px;
+      transition: all .3s; white-space: nowrap;
+    }
+    .view-btn-outline:hover {
+      background: var(--glow);
+      box-shadow: 0 0 16px rgba(0,230,118,.25);
+      transform: translateY(-2px);
+    }
+
+    /* ══════════════════════════════════════
+       PROJECT CARDS GRID
+    ══════════════════════════════════════ */
+    .projects-section {
+      max-width: 900px; margin: 3rem auto 0; padding: 0 5%;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: all .4s cubic-bezier(.175,.885,.32,1.2);
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 35px rgba(0,230,118,.12);
+    }
+
+    .card-banner {
+      background: linear-gradient(135deg, #041a2e, #062040);
+      padding: 2rem 1.5rem;
+      position: relative; overflow: hidden;
+      min-height: 110px;
+      display: flex; align-items: flex-end; gap: 1rem;
+    }
+    .card-banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 18px,
+        rgba(0,230,118,.018) 18px, rgba(0,230,118,.018) 19px
+      );
+    }
+
+    .card-icon { font-size: 2.2rem; position: relative; z-index: 1; }
+    .card-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem; letter-spacing: 3px;
+      color: rgba(0,230,118,.35);
+      position: absolute; top: 1rem; right: 1rem;
+      z-index: 1;
+    }
+
+    .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+
+    .card-body h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.85rem, 2.2vw, 1rem);
+      font-weight: 700; color: white;
+      margin-bottom: 0.6rem; line-height: 1.3;
+    }
+
+    .card-problem {
+      font-size: 0.88rem; color: var(--text-muted);
+      line-height: 1.6; margin-bottom: 1rem; flex: 1;
+    }
+
+    .card-outcome {
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      background: rgba(0,230,118,.05);
+      border-left: 2px solid var(--accent-green);
+      padding: 0.5rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stack-text {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.58rem; letter-spacing: 1px;
+      color: var(--accent-teal);
+    }
+
+    .card-link {
+      text-decoration: none; color: white;
+      font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      transition: color .3s;
+    }
+    .card-link:hover { color: var(--accent-green); }
+
+    /* ══════════════════════════════════════
+       SEO SCHEMA SECTION
+    ══════════════════════════════════════ */
+    .schema-section {
+      max-width: 900px; margin: 4rem auto 0; padding: 0 5%;
+    }
+
+    .schema-card {
+      background: linear-gradient(135deg, rgba(0,188,212,.06) 0%, rgba(0,230,118,.04) 100%);
+      border: 1px solid rgba(0,188,212,.3);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .schema-header {
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid rgba(0,188,212,.15);
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .schema-header .s-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .schema-header-text h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(0.9rem, 3vw, 1.2rem);
+      font-weight: 700; color: white; margin-bottom: 0.35rem;
+    }
+    .schema-header-text .subtitle {
+      font-size: 0.85rem; color: var(--accent-teal); letter-spacing: 1px;
+    }
+
+    .schema-body { padding: 1.5rem 2rem; }
+    .schema-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.25rem; margin-bottom: 1.5rem;
+    }
+    @media (max-width: 560px) {
+      .schema-row { grid-template-columns: 1fr; }
+      .featured-body, .schema-body { padding: 1.25rem; }
+    }
+
+    .code-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(0,0,0,.4);
+      border: 1px solid rgba(0,188,212,.3);
+      color: var(--accent-teal);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem; letter-spacing: 1px;
+      padding: 0.3rem 0.75rem; border-radius: 4px;
+    }
+
+    .result-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .result-list li {
+      font-size: 0.9rem; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      line-height: 1.5;
+    }
+    .result-list li::before {
+      content: '▸'; color: var(--accent-green); flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .result-list li strong { color: var(--text-primary); }
+
+    /* ══════════════════════════════════════
+       STATS STRIP
+    ══════════════════════════════════════ */
+    .stats-strip {
+      max-width: 900px; margin: 4rem auto 0; padding: 0 5%;
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden;
+    }
+    .stat-item {
+      background: var(--bg-card);
+      padding: 1.5rem 1rem; text-align: center;
+    }
+    .stat-item .num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--accent-green); display: block;
+    }
+    .stat-item .lbl {
+      font-size: 0.7rem; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-top: 0.2rem; display: block;
+    }
+
+    /* ══════════════════════════════════════
+       CALL TO ACTION
+    ══════════════════════════════════════ */
+    .cta-section {
+      text-align: center;
+      padding: 5rem 5%;
+      margin-top: 5rem;
+      background: rgba(0,230,118,.02);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800; margin-bottom: 1rem;
+    }
+    .cta-section h2 span { color: var(--accent-green); }
+    .cta-section p {
+      color: var(--text-muted); font-size: 1.05rem;
+      max-width: 500px; margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.82rem; letter-spacing: 1px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    footer strong {
+      color: var(--accent-green);
+      font-family: 'Orbitron', monospace; font-size: 0.75rem;
+    }
+
+    /* ══════════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.revealed {
+      opacity: 1; transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header>
+    <a href="index.html" class="logo-link">
+    <img src="logo.jpg" alt="DigitMarkT Logo" style="height: 45px; width: auto; object-fit: contain;">
+  </a>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html" aria-current="page">Portfolio</a>
+      <a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cta">Get Started</a>
+    </nav>
+  </header>
+
+  <div class="page">
+
+    <!-- ══ HERO ══ -->
+    <div class="portfolio-hero reveal">
+      <span class="section-label">Selected Work</span>
+      <h1>My <span class="hl">Portfolio</span></h1>
+      <p class="value-hook">
+        I don't just write code — I <strong>engineer business outcomes.</strong>
+        Every project here started as a real problem: a local business invisible on Google,
+        a manual booking process costing hours every week, a brand with no digital presence.
+        My work turns those gaps into <strong>measurable, revenue-generating solutions</strong>
+        — built with precision, shipped fast, and designed to last.
+      </p>
+    </div>
+
+    <!-- ══ STATS ══ -->
+    <div class="stats-strip reveal">
+      <div class="stats-inner">
+        <div class="stat-item"><span class="num">10+</span><span class="lbl">Projects Shipped</span></div>
+        <div class="stat-item"><span class="num">100%</span><span class="lbl">Client Satisfaction</span></div>
+        <div class="stat-item"><span class="num">4+</span><span class="lbl">Service Areas</span></div>
+        <div class="stat-item"><span class="num">24h</span><span class="lbl">Response Time</span></div>
+      </div>
+    </div>
+
+    <!-- ══ FILTER BAR ══ -->
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web Dev</button>
+      <button class="filter-btn" data-filter="design">Design</button>
+      <button class="filter-btn" data-filter="app">Apps</button>
+      <button class="filter-btn" data-filter="seo">SEO</button>
+    </div>
+
+    <!-- ══ FEATURED: DigitMarkT AGENCY ══ -->
+    <div class="featured-wrap reveal" data-category="web design app">
+      <div class="featured-label">Featured Project</div>
+      <div class="featured-card">
+        <div class="featured-banner">
+          <div class="featured-icon">🏢</div>
+          <div class="featured-meta">
+            <div class="proj-num">Project // 01</div>
+            <h2>DigitMarkT — <span>Digital Agency</span></h2>
+          </div>
+        </div>
+        <div class="featured-body">
+          <div class="proj-grid-2">
+            <div class="detail-block">
+              <label>The Business Problem</label>
+              <p>Freelance developers in South Africa struggle to be taken seriously without a credible digital presence. Clients need to see professionalism before they spend. The gap: no portfolio, no trust, no conversions.</p>
+            </div>
+            <div class="detail-block">
+              <label>Tech Stack</label>
+              <div class="tech-pills">
+                <span class="pill">HTML5</span>
+                <span class="pill">CSS3</span>
+                <span class="pill">JavaScript</span>
+                <span class="pill">Responsive Design</span>
+                <span class="pill">SEO</span>
+              </div>
+            </div>
+          </div>
+          <div class="outcome-box">
+            <div class="icon">📈</div>
+            <p><strong>Measurable Outcome:</strong> A fully branded, multi-page agency website that positions DigitMarkT as a professional digital services provider. Built to convert visitors into paying clients — with a 24-hour WhatsApp response loop and clear service CTAs that cut sales cycle time by demonstrating expertise upfront.</p>
+          </div>
+          <div class="card-footer-actions">
+            <div class="tag-row">
+              <span class="tag">Web Dev</span>
+              <span class="tag">Design</span>
+              <span class="tag">Branding</span>
+            </div>
+            <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
+              <a href="index.html" class="view-btn">View Live ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROJECT CARDS GRID ══ -->
+    <div class="projects-section">
+      <span class="section-label">All Projects</span>
+      <div class="projects-grid">
+
+        <!-- Card 1: Eyelashes Business -->
+        <article class="project-card reveal" data-category="web design">
+          <div class="card-banner">
+            <span class="card-num">02</span>
+            <div class="card-icon">💅</div>
+          </div>
+          <div class="card-body">
+            <h3>Eyelashes Business Website</h3>
+            <p class="card-problem">
+              A local beauty entrepreneur in Katlehong was relying entirely on word-of-mouth. She had no online presence, no way to show her work, and no booking channel beyond WhatsApp messages — limiting reach and losing potential clients to competitors with websites.
+            </p>
+            <div class="card-outcome">
+              ✓ High-conversion landing page deployed. Client reports consistent new bookings from online search traffic within the first month.
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="stack-text">HTML / CSS / JS</span>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </article>
+
+        <!-- Card 2: Mechanic Booking App -->
+        <article class="project-card reveal" data-category="app">
+          <div class="card-banner">
+            <span class="card-num">03</span>
+            <div class="card-icon">🔧</div>
+          </div>
+          <div class="card-body">
+            <h3>Mechanic Booking App</h3>
+            <p class="card-problem">
+              A motor mechanic was managing all bookings manually via phone calls and a physical diary — leading to double-bookings, missed appointments, and no customer history. The business had no digital record of clients or jobs.
+            </p>
+            <div class="card-outcome">
+              ✓ Custom booking + management system built. Reduced admin time and eliminated scheduling conflicts. Full job-history tracking for repeat clients.
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="stack-text">React.js / Firebase</span>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </article>
+
+        <!-- Card 3: Greeting Card Generator -->
+        <article class="project-card reveal" data-category="app">
+          <div class="card-banner">
+            <span class="card-num">04</span>
+            <div class="card-icon">🖼️</div>
+          </div>
+          <div class="card-body">
+            <h3>My Greeting Card (Automation)</h3>
+            <p class="card-problem">
+              Small business owners sending personalised client communications were spending hours manually creating and sending cards for birthdays, promotions, and follow-ups — time that could be reinvested into the business.
+            </p>
+            <div class="card-outcome">
+              ✓ Python automation script generates branded, personalised greeting cards in bulk. Reduces a 3-hour manual task to under 5 minutes.
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="stack-text">Python / Pillow</span>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ══ SEO SCHEMA FEATURE ══ -->
+    <div class="schema-section reveal" data-category="seo">
+      <span class="section-label">Technical SEO</span>
+      <div class="schema-card">
+        <div class="schema-header">
+          <div class="s-icon">🔍</div>
+          <div class="schema-header-text">
+            <h3>Verified Plumber — JSON-LD SEO Schema Template</h3>
+            <div class="subtitle">Local Business · Structured Data · Google Rich Results</div>
+          </div>
+        </div>
+        <div class="schema-body">
+          <div class="schema-row">
+            <div class="detail-block">
+              <label>The Business Problem</label>
+              <p>Local service businesses — plumbers, electricians, builders — are invisible on Google despite doing great work. Their competitors rank first not because they're better, but because their websites speak Google's language. <strong>Structured data (JSON-LD) is that language,</strong> and most local businesses have none.</p>
+            </div>
+            <div class="detail-block">
+              <label>The Solution</label>
+              <p>A reusable, production-ready JSON-LD Schema Markup template for local service businesses. Implements <code style="color:var(--accent-teal); font-size:0.82rem;">LocalBusiness</code>, <code style="color:var(--accent-teal); font-size:0.82rem;">Service</code>, and <code style="color:var(--accent-teal); font-size:0.82rem;">Review</code> schema types — telling Google exactly <em>who</em> the business is, <em>where</em> they operate, and <em>what</em> customers say.</p>
+              <div class="tech-pills" style="margin-top:0.75rem;">
+                <span class="code-chip">JSON-LD</span>
+                <span class="code-chip">Schema.org</span>
+                <span class="code-chip">HTML5</span>
+                <span class="code-chip">Technical SEO</span>
+              </div>
+            </div>
+          </div>
+          <div class="detail-block" style="margin-bottom:1.25rem;">
+            <label>Measurable Outcomes</label>
+            <ul class="result-list">
+              <li>Enables <strong>Google Rich Results</strong> (star ratings, phone number, address in search snippets) — dramatically increasing click-through rates vs. plain listings.</li>
+              <li>Qualifies the business for <strong>Google's Local Pack</strong> (the map + 3-result block at the top of local searches) — where 46% of all Google searches end.</li>
+              <li>Template is <strong>reusable across service industries</strong> — plumbers, electricians, cleaners, mechanics — any local business can be onboarded in under 30 minutes.</li>
+              <li>Fully <strong>Google Search Console-validated</strong> with zero structured data errors.</li>
+            </ul>
+          </div>
+          <div class="card-footer-actions">
+            <div class="tag-row">
+              <span class="tag">SEO</span>
+              <span class="tag">JSON-LD</span>
+              <span class="tag">Local Business</span>
+            </div>
+            <a href="#" class="view-btn-outline">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CTA ══ -->
+    <section class="cta-section">
+      <h2>Have a Problem That <span>Needs Solving?</span></h2>
+      <p>Whether you need a website, an app, or a strategy to get found on Google — let's build something that actually works for your business.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="view-btn">Start a Project</a>
+        <a href="https://wa.me/27642122136" class="view-btn-outline" target="_blank" rel="noopener">WhatsApp Me ↗</a>
+      </div>
+    </section>
+
+  </div><!-- /.page -->
+
+  <footer>
+    &copy; 2026 <strong>DigitMarkT</strong> &mdash; Siyabonga Thomo
+  </footer>
+
+  <script>
+    /* ── Mobile Nav ── */
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+    hamburger.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Filter ── */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterTargets = document.querySelectorAll('[data-category]');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        filterTargets.forEach(el => {
+          const cat = el.dataset.category || '';
+          const show = f === 'all' || cat.includes(f);
+          el.style.display = show ? '' : 'none';
+          if (show) setTimeout(() => el.classList.add('revealed'), 50);
+        });
+      });
+    });
+
+    /* ── Scroll Reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
